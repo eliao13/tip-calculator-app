@@ -13,6 +13,7 @@ body {
   --tertiary-color: hsl(185, 41%, 84%);
   --quaternary-color: hsl(189, 41%, 97%);
   --white-color: white;
+  --error-color: rgb(221, 106, 60);
 
   label {
     color: var(--primary-color);
@@ -37,6 +38,10 @@ body {
 
     &:focus {
       border: 2px solid var(--secondary-color);
+    }
+
+    &.error {
+      border: 2px solid var(--error-color);
     }
   }
 
@@ -141,6 +146,16 @@ main {
           input {
             width: 100%;
             box-sizing: border-box;
+          }
+        }
+
+        .people-input-label-wrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .error-message {
+            color: var(--error-color);
           }
         }
       }

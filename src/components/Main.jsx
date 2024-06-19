@@ -53,6 +53,13 @@ export default function Main() {
     setTotalAmount(0);
   }
 
+  function disableResetButton() {
+    if (bill || tipPercentage || numberOfPeople) {
+      return false;
+    }
+    return true;
+  }
+
   useEffect(() => {
     validateNumberOfPeople();
   }, [numberOfPeople]);
@@ -112,12 +119,15 @@ export default function Main() {
           </div>
 
           <div className="people-input">
-            <label htmlFor="people">Number of People</label>
-            {numberOfPeopleError && (
-              <p className="error-message">Can&#39;t be zero</p>
-            )}
+            <div className="people-input-label-wrapper">
+              <label htmlFor="people">Number of People</label>
+              {numberOfPeopleError && (
+                <p className="error-message">Can&#39;t be zero</p>
+              )}
+            </div>
             <div className="input-wrapper">
               <input
+                className={numberOfPeopleError ? "error" : ""}
                 type="number"
                 id="people"
                 min={0}
@@ -150,7 +160,11 @@ export default function Main() {
             </div>
             <h2>&#36;{totalAmount}</h2>
           </div>
-          <button className="reset-button" onClick={() => reset()}>
+          <button
+            className="reset-button"
+            onClick={() => reset()}
+            disabled={disableResetButton()}
+          >
             Reset
           </button>
         </section>

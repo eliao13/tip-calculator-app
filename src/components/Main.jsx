@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import TipPercentageButton from "./TipPercentageButton";
+import { FaDollarSign } from "react-icons/fa";
+import { IoMdPerson } from "react-icons/io";
 
 export default function Main() {
   const tipPercentages = [5, 10, 15, 25, 50];
@@ -68,39 +70,45 @@ export default function Main() {
         <section className="calculate-section">
           <div className="bill-input">
             <label htmlFor="bill">Bill</label>
-            <input
-              type="number"
-              id="bill"
-              value={bill}
-              placeholder="0"
-              onChange={(e) => setBill(e.target.value)}
-            />
+            <div className="input-wrapper">
+              <input
+                type="number"
+                id="bill"
+                value={bill}
+                placeholder="0"
+                onChange={(e) => setBill(e.target.value)}
+              />
+              <FaDollarSign className="input-icon" />
+            </div>
           </div>
 
           <div className="tip-percentage-buttons">
             <label htmlFor="">Select Tip %</label>
-            {tipPercentages.map((percentage) => (
-              <TipPercentageButton
-                key={percentage}
-                percentage={percentage}
-                setTipPercentageHandler={setTipPercentageHandler}
+
+            <div className="button-group">
+              {tipPercentages.map((percentage) => (
+                <TipPercentageButton
+                  key={percentage}
+                  percentage={percentage}
+                  setTipPercentageHandler={setTipPercentageHandler}
+                />
+              ))}
+              <input
+                placeholder="Custom"
+                type="number"
+                id="custom-tip-percentage"
+                min={0}
+                value={customTipPercentage}
+                onChange={(e) => {
+                  if (e.target.value < 0) {
+                    setCustomTipPercentage(0);
+                  } else {
+                    setCustomTipPercentage(e.target.value);
+                    setTipPercentage(e.target.value);
+                  }
+                }}
               />
-            ))}
-            <input
-              placeholder="Custom"
-              type="number"
-              id="custom-tip-percentage"
-              min={0}
-              value={customTipPercentage}
-              onChange={(e) => {
-                if (e.target.value < 0) {
-                  setCustomTipPercentage(0);
-                } else {
-                  setCustomTipPercentage(e.target.value);
-                  setTipPercentage(e.target.value);
-                }
-              }}
-            />
+            </div>
           </div>
 
           <div className="people-input">
@@ -108,38 +116,43 @@ export default function Main() {
             {numberOfPeopleError && (
               <p className="error-message">Can&#39;t be zero</p>
             )}
-            <input
-              type="number"
-              id="people"
-              min={0}
-              placeholder="0"
-              value={numberOfPeople}
-              onChange={(e) => {
-                if (e.target.value < 0) {
-                  setNumberOfPeople(0);
-                } else {
-                  setNumberOfPeople(e.target.value);
-                }
-              }}
-            />
+            <div className="input-wrapper">
+              <input
+                type="number"
+                id="people"
+                min={0}
+                placeholder="0"
+                value={numberOfPeople}
+                onChange={(e) => {
+                  if (e.target.value < 0) {
+                    setNumberOfPeople(0);
+                  } else {
+                    setNumberOfPeople(e.target.value);
+                  }
+                }}
+              />
+              <IoMdPerson className="input-icon" />
+            </div>
           </div>
         </section>
         <section className="results-section">
           <div className="tip-amount">
-            <div>
+            <div className="span-wrapper">
               <p>Tip Amount</p>
-              <p>/ person</p>
+              <span>/ person</span>
             </div>
-            <p>&#36;{tipAmountPerPerson}</p>
+            <h2>&#36;{tipAmountPerPerson}</h2>
           </div>
           <div className="total-amount">
-            <div>
+            <div className="span-wrapper">
               <p>Total</p>
-              <p>/ person</p>
+              <span>/ person</span>
             </div>
-            <p>&#36;{totalAmount}</p>
+            <h2>&#36;{totalAmount}</h2>
           </div>
-          <button onClick={() => reset()}>Reset</button>
+          <button className="reset-button" onClick={() => reset()}>
+            Reset
+          </button>
         </section>
       </div>
     </main>

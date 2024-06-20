@@ -98,6 +98,7 @@ export default function Main() {
                   key={percentage}
                   percentage={percentage}
                   setTipPercentageHandler={setTipPercentageHandler}
+                  tipPercentage={tipPercentage}
                 />
               ))}
               <input

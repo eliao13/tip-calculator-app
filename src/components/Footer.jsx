@@ -6,10 +6,9 @@ export default function Footer() {
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
           Frontend Mentor
         </a>
-        .
       </p>
       <p>
-        Coded by <a href="#">Evan Liao</a>.
+        Coded by <a href="#">Evan Liao</a>
       </p>
     </footer>
   );

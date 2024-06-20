@@ -31,6 +31,7 @@ export default function Main() {
     const tipAmount = (bill * tipPercentage) / 100;
     setTipAmount(tipAmount.toFixed(2));
     calulcateTipAmountPerPerson(tipAmount);
+    calculateTotalAmount(tipAmount);
   }
 
   function calulcateTipAmountPerPerson(tipAmount) {
@@ -38,7 +39,7 @@ export default function Main() {
     setTipAmountPerPerson(tipPerPerson);
   }
 
-  function calculateTotalAmount() {
+  function calculateTotalAmount(tipAmount) {
     const totalAmount = bill / numberOfPeople + tipAmount / numberOfPeople;
     setTotalAmount(totalAmount.toFixed(2));
   }
@@ -67,7 +68,6 @@ export default function Main() {
   useEffect(() => {
     if (bill && tipPercentage && numberOfPeople) {
       calculateTipAmount();
-      calculateTotalAmount();
     }
   }, [bill, tipPercentage, numberOfPeople]);
 
